@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/Polina-KHV/mesto-react/static/css/main.7e7e3bca.css",
+    "main.js": "/Polina-KHV/mesto-react/static/js/main.876b66c8.js",
+    "static/js/787.5530211c.chunk.js": "/Polina-KHV/mesto-react/static/js/787.5530211c.chunk.js",
+    "static/media/Inter-Medium.woff?v=3.19": "/Polina-KHV/mesto-react/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
+    "static/media/Inter-Black.woff?v=3.19": "/Polina-KHV/mesto-react/static/media/Inter-Black.c6938660eec019fefd68.woff",
+    "static/media/Inter-Regular.woff?v=3.19": "/Polina-KHV/mesto-react/static/media/Inter-Regular.8c206db99195777c6769.woff",
+    "static/media/Inter-Medium.woff2?v=3.19": "/Polina-KHV/mesto-react/static/media/Inter-Medium.293fd13dbca5a3e450ef.woff2",
+    "static/media/Inter-Black.woff2?v=3.19": "/Polina-KHV/mesto-react/static/media/Inter-Black.15ca31c0a2a68f76d2d1.woff2",
+    "static/media/Inter-Regular.woff2?v=3.19": "/Polina-KHV/mesto-react/static/media/Inter-Regular.c8ba52b05a9ef10f4758.woff2",
+    "static/media/Logo.svg": "/Polina-KHV/mesto-react/static/media/Logo.bbe2a6eafac19c3d031c.svg",
+    "static/media/Like_Icon.svg": "/Polina-KHV/mesto-react/static/media/Like_Icon.1ad06e85f169668a1f36.svg",
+    "index.html": "/Polina-KHV/mesto-react/index.html",
+    "static/media/Trash_Icon.svg": "/Polina-KHV/mesto-react/static/media/Trash_Icon.e3c42771bff3aaa52f76.svg",
+    "static/media/Like_Icon_Active.svg": "/Polina-KHV/mesto-react/static/media/Like_Icon_Active.35948469632d0421d697.svg",
+    "static/media/Edit_Button.svg": "/Polina-KHV/mesto-react/static/media/Edit_Button.6c7bf05444b9793fdf6e.svg",
+    "static/media/Close_Icon.svg": "/Polina-KHV/mesto-react/static/media/Close_Icon.039f1f5203f653b4bacd.svg",
+    "static/media/Add_Button.svg": "/Polina-KHV/mesto-react/static/media/Add_Button.bed8c136e13907f5eefb.svg",
+    "main.7e7e3bca.css.map": "/Polina-KHV/mesto-react/static/css/main.7e7e3bca.css.map",
+    "main.876b66c8.js.map": "/Polina-KHV/mesto-react/static/js/main.876b66c8.js.map",
+    "787.5530211c.chunk.js.map": "/Polina-KHV/mesto-react/static/js/787.5530211c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7e7e3bca.css",
+    "static/js/main.876b66c8.js"
+  ]
+}
