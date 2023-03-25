@@ -1,26 +1,17 @@
-import React from 'react';
+import {useContext} from 'react';
 import { UserContext } from '../contexts/CurrentUserContext';
-
-
 
 function Card(props) {
 
-  // Подписываемся на контекст данных пользователя
-  const currentUser = React.useContext(UserContext);
+  const currentUser = useContext(UserContext);
 
-  // Проверяем, являемся ли мы владельцем карточки
   const isOwn = props.card.owner._id === currentUser._id;
-
-  // Проверяем, лайкали ли мы карточку
   const isLiked = props.card.likes.some(i => i._id === currentUser._id);
 
   const cardLikeButtonClassName = ( 
     `card-grid__like-button ${isLiked && 'card-grid__like-button_active'}` 
   );
 
-
-
-  // Возвращаем разметку
   return (
     <li className="card-grid__item"> 
       <img

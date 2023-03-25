@@ -1,12 +1,10 @@
-import React from 'react';
+import {useContext} from 'react';
 import Card from './Card';
 import { UserContext } from '../contexts/CurrentUserContext';
 
-
-
 function Main(props) {
   
-  const currentUser = React.useContext(UserContext);
+  const currentUser = useContext(UserContext);
 
   return (
     <main className="content">
@@ -29,22 +27,17 @@ function Main(props) {
         <ul className="card-grid__container">
           {props.cards.map((card) =>
             <Card
-
               card={card}
               key={card._id}
               cardLink={card.link}
               cardName={card.name}
               cardLikes={card.likes.length}
-
-
               onCardClick={
                 function(card) {props.handleCardClick(card)}
               }
-
               onCardLike={
                 function(card) {props.handleLikeClick(card)}
               }
-
               onCardDelete={
                 function(card) {props.handleDeleteClick(card)}
               }

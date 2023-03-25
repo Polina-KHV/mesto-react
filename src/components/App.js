@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import { api } from '../utils/api';
 import Header from './Header';
 import Main from './Main';
@@ -10,14 +10,23 @@ import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import { UserContext } from '../contexts/CurrentUserContext';
 
-
-
 function App() {
 
-  // Создаем стейт для данных пользователя
-  const [currentUser, setCurrentUser] = React.useState('');
+  // Стейты
+  const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
+  const [selectedCard, setSelectedCard] = useState({});
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isCardPopupOpen, setIsCardPopupOpen] = useState(false);
 
-  React.useEffect(() => {
+
+
+
+
+  // Загружаем данные пользователя
+  useEffect(() => {
     api.getUserInfo()
     .then((data) => {
       setCurrentUser(data);
@@ -27,12 +36,8 @@ function App() {
     });
   }, []);
 
-
-
-  // Создаем стейт для массива карточек
-  const [cards, setCards] = React.useState([]);
-
-  React.useEffect(() => {
+  // Загружаем массив карточек
+  useEffect(() => {
     api.getInitialCards()
     .then((data) => {
       setCards(
@@ -50,13 +55,10 @@ function App() {
     });
   }, []);
 
-
-
   // Обрабатываем лайк карточек
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
-    // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
@@ -66,19 +68,17 @@ function App() {
     });
   };
 
-
-
   // Обрабатываем удаление карточек
   function handleCardDelete(card) {
     api.deleteCard(card._id)
-    .then(
+    .then(() => {
       setCards((state) => state.filter((c) => c._id !== card._id))
+    }
     )
     .catch((err) => {
       console.log(err);
     });
   };
-
 
   // Обрабатываем сабмит формы Place Addition
   // Добавляем карточку
@@ -87,14 +87,11 @@ function App() {
     .then((newCard) => {
       setCards([newCard, ...cards]);
       closeAllPopups();
-    }
-    )
+    })
     .catch((err) => {
       console.log(err);
     });
   };
-
-
 
   // Обрабатываем сабмит формы Profile Info
   function handleUpdateUser(data) {
@@ -108,7 +105,6 @@ function App() {
     });
   };
 
-
   // Обрабатываем сабмит формы Avatar Update
   function handleUpdateAvatar(data) {
     api.setUserAvatar(data)
@@ -121,40 +117,18 @@ function App() {
     });
   };
 
-
-
-  // Обрабатываем открывание Popup Avatar Update
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-
+  // Обрабатываем открывание попапов
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   };
-
-
-
-  // Обрабатываем открывание Popup Profile Info
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   };
 
-
-
-  // Обрабатываем открывание Popup Place Addition
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   };
-
-
-
-  // Обрабатываем открывание Popup Card
-  const [selectedCard, setSelectedCard] = React.useState({});
-  const [isCardPopupOpen, setIsCardPopupOpen] = React.useState(false);
-
-
 
   // Обрабатываем закрывание попапов
   function closeAllPopups() {
@@ -164,9 +138,6 @@ function App() {
     setIsCardPopupOpen(false);
   };
 
-
-
-  // Возвращаем разметку
   return (
     <UserContext.Provider value={currentUser}>
       <div className="page">
@@ -176,22 +147,18 @@ function App() {
 
           <Main
             cards={cards}
-            
             onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
-
             handleCardClick={
               function(card){
                 setSelectedCard(card);
                 setIsCardPopupOpen(true);
               }
             }
-
             handleLikeClick={
               function(card) {handleCardLike(card)}
             }
-
             handleDeleteClick={
               function(card) {handleCardDelete(card)}
             }

@@ -1,4 +1,4 @@
-import React from "react";
+import {useState, useEffect, useContext} from "react";
 import PopupWithForm from "./PopupWithForm";
 import { UserContext } from "../contexts/CurrentUserContext";
 
@@ -6,8 +6,8 @@ import { UserContext } from "../contexts/CurrentUserContext";
 
 function EditProfilePopup(props) {
 
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
   function handleNameChange(evt) {
     setName(evt.target.value)
@@ -17,12 +17,12 @@ function EditProfilePopup(props) {
     setDescription(evt.target.value)
   };
 
-  const currentUser = React.useContext(UserContext);
+  const currentUser = useContext(UserContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, props.isOpen]);
 
   function handleSubmit(evt) {
       evt.preventDefault();
@@ -42,9 +42,9 @@ function EditProfilePopup(props) {
       onClose={props.onClose}
       onSubmit={handleSubmit}
     >
-      <input type="text" className="popup__input" name="name" id="name-input"  minLength="2" maxLength="40" required value={name} onChange={handleNameChange} />
+      <input type="text" className="popup__input" name="name" id="name-input"  minLength="2" maxLength="40" required value={name || ''} onChange={handleNameChange} />
       <span className="popup__input-error name-input-error"></span>
-      <input type="text" className="popup__input" name="job" id="job-input"  minLength="2" maxLength="200" required value={description} onChange={handleDescriptionChange} />
+      <input type="text" className="popup__input" name="job" id="job-input"  minLength="2" maxLength="200" required value={description || ''} onChange={handleDescriptionChange} />
       <span className="popup__input-error job-input-error"></span>
     </PopupWithForm>
   )
