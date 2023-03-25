@@ -18,18 +18,18 @@ class Api {
     })
   }
 
-  updateUserInfo(data) {
+  setUserInfo(data) {
     return this._request(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
-        about: data.job
+        about: data.about
       })
     })
   }
 
-  updateUserAvatar(data) {
+  setUserAvatar(data) {
     return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
@@ -50,7 +50,7 @@ class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: data.place,
+        name: data.name,
         link: data.link
       })
     })
@@ -63,16 +63,9 @@ class Api {
     })
   }
 
-  putLike(cardId) {
+  changeLikeCardStatus(cardId, isLiked) {
     return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: 'PUT',
-      headers: this._headers
-    })
-  }
-
-  deleteLike(cardId) {
-    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: 'DELETE',
+      method: !isLiked ? 'DELETE' : 'PUT',
       headers: this._headers
     })
   }
